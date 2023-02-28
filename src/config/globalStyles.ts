@@ -1,6 +1,13 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
+import type { Theme } from '@mui/material/styles';
 
-export default createGlobalStyle` 
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme {
+    shadows: string[];
+  }
+}
+
+export default createGlobalStyle`
   html,
   body,
   #root {
@@ -8,8 +15,8 @@ export default createGlobalStyle`
     margin: 0;
     display: flex;
     flex: 1;
-    font-size: 12px;
     max-width: 100%;
+    font-family: ${({ theme }) => theme.typography.fontFamily};
   }
 
   #root > div {
@@ -20,7 +27,8 @@ export default createGlobalStyle`
   div {
     box-sizing: border-box;
   }
+  
   a {
   text-decoration: none;
   }
-`
+`;
